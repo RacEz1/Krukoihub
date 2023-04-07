@@ -306,43 +306,56 @@ local toggleautoRevive = section2:Toggle{
 end,
 }
 
-local ReviveSys = "Respawn"
+--[[local ReviveSys = "Respawn"
 local PlayerN = game:GetService("Players").LocalPlayer
 local EventRev = game:GetService("ReplicatedStorage").ReviveSystem.Event
 local NotifyScript1 = "Success"
 local NotifyTitle2 = "KrukoiHub"
 local NotifyScript3 = "Auto Revive"
-local Event2 = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent
+local Event2 = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent]]
 
 spawn(function()
     while true do
         pcall(function()
+            local ReviveSys = "Respawn"
+            local PlayerN = game:GetService("Players").LocalPlayer
+            local EventRev = game:GetService("ReplicatedStorage").ReviveSystem.Event
+            local NotifyScript1 = "Success"
+            local NotifyTitle2 = "KrukoiHub"
+            local NotifyScript3 = "Auto Revive"
+            local Event2 = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent
             if _G.ReviveAuto then
-            wait(1)
-            local character = PlayerN.Character
-            if not character then
-                return
+                local character = PlayerN.Character
+                if not character then
+                    return
+                end
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                if humanoid.Health == 0 then
+                    Event2:FireServer(NotifyScript1, NotifyTitle2, NotifyScript3)
+                    EventRev:FireServer(ReviveSys, PlayerN)
+                end
             end
-            local humanoid = character:FindFirstChildOfClass("Humanoid")
-            if humanoid.Health == 0 then
-                Event2:FireServer(NotifyScript1, NotifyTitle2, NotifyScript3)
-                EventRev:FireServer(ReviveSys, PlayerN)
-            end
-        end
-        wait(1)
         end)
+        wait(1)
     end
 end)
-local KillallTitle = "Respawn"
+
+--[[local KillallTitle = "Respawn"
 local KillAllGetEvent = game:GetService("ReplicatedStorage").ReviveSystem.Event
 local NotifyTitle1 = "Success"
 local NotifyTitle2 = "KrukoiHub"
 local NotifyScript3 = "Kill All Players"
-local Event2 = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent
+local Event2 = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent]]
 
 section3:Button{
     Name = "Kill All Players",
     Callback  = function()
+        local KillallTitle = "Respawn"
+        local KillAllGetEvent = game:GetService("ReplicatedStorage").ReviveSystem.Event
+        local NotifyTitle1 = "Success"
+        local NotifyTitle2 = "KrukoiHub"
+        local NotifyScript3 = "Kill All Players"
+        local Event2 = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent
         local KillallGetPlayer = game:GetService("Players"):GetPlayers()
         for i, player in ipairs(KillallGetPlayer) do
             KillAllGetEvent:FireServer(KillallTitle, player)
@@ -377,18 +390,24 @@ local toggle = section4:Toggle{
     end,
 }
 
-local KillSys = "Respawn"
+--[[local KillSys = "Respawn"
 local EventRevkill = game:GetService("ReplicatedStorage").ReviveSystem.Event
 local NotifyScript1 = "Success"
 local NotifyTitle2 = "KrukoiHub"
 local NotifyScript3 = "Add Money x10000"
-local EventKill = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent
+local EventKill = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent]]
 
 spawn(function()
     while wait(7) do
         pcall(function()
-            if _G.killx10 and playerNameKill ~= "" then
-                local SetNamePlayers = game:GetService("Players"):FindFirstChild(playerNameKill)
+            local KillSys = "Respawn"
+            local EventRevkill = game:GetService("ReplicatedStorage").ReviveSystem.Event
+            local NotifyScript1 = "Success"
+            local NotifyTitle2 = "KrukoiHub"
+            local NotifyScript3 = "Add Money x10000"
+            local EventKill = game:GetService("ReplicatedStorage").pNotifyStorage.pNotifyEvent
+            if _G.killx10 and _G.playerNameKill ~= "" then
+                local SetNamePlayers = game:GetService("Players"):FindFirstChild(_G.playerNameKill)
                 if SetNamePlayers then
                     game.StarterGui:SetCore("SendNotification", {
                         Title = "KrukoiHub"; 
@@ -396,9 +415,6 @@ spawn(function()
                         Icon = "rbxassetid://12983051832";
                         Duration = 10;
                     })
-                    --[[for i=1, 10 do
-                        EventRevkill:FireServer(KillSys, SetNamePlayers)
-                    end]]
                     EventKill:FireServer(NotifyScript1, NotifyTitle2, NotifyScript3)
                     EventRevkill:FireServer(KillSys, SetNamePlayers)
                     EventRevkill:FireServer(KillSys, SetNamePlayers)
